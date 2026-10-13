@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% extends "shop/base.html" %}
+
+{% block title %}Список товарів{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">Список товарів</h1>
+    <a href="{% url 'product_create' %}" class="btn btn-primary">
+        Додати товар
+    </a>
+</div>
+
+{% for product in products %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h2 class="h5">{{ product.title }}</h2>
+            <p class="mb-1">Артикул: {{ product.article }}</p>
+            <p class="mb-1">Ціна: {{ product.price }} грн</p>
+            <p>{{ product.description }}</p>
+
+            <a
+                href="{% url 'product_update' product.pk %}"
+                class="btn btn-outline-primary btn-sm"
+            >
+                Редагувати
+            </a>
+        </div>
+    </div>
+{% empty %}
+    <p>Товарів поки немає.</p>
+{% endfor %}
+{% endblock %}
+</body>
+</html>
